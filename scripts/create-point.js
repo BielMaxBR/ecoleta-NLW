@@ -27,16 +27,19 @@ function getCities(event)
 
     const url = `ttps://servicodados.ibge.gov.br/api/v1/localidades/distritos/${ufValue}/municipios`
 
+    ufSelect.innerHTML = ""
+    citySelect.disabled = true
+
+
     fetch(url)
         .then( res => res.json() )
         .then ( cities => {
-
             for (const city of cities) {
-                ufSelect.innerHTML += `<option value="${city.id}">${city.name}</option>`
+                ufSelect.innerHTML += `<option value="${city.nome}">${city.nome}</option>`
             }
-
             citySelect.disabled = false
         })
 }
-document.querySelector("select[name=uf]")
-    .addEventListener("change", () => getCities)
+document
+    .querySelector("select[name=uf]")
+    .addEventListener("change", getCities)
